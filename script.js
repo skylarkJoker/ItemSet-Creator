@@ -274,12 +274,16 @@ $(document).ready(function(){
       });
     }
 
+
+
     var setItemList = function(){
 
       for(key in data){
-        var item = '<li id="'+ key +'"><img src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/'+key+'.png "></li>';
+        var item = '<li id="'+ key +'"><img src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/'+key+'.png " onerror="removeImage()"></li>';
          $('#item-list').append(item);
-
+         $( "img" ).error(function() {
+           $( this ).hide();
+         });
       }
     }
 
