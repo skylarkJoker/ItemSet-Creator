@@ -144,10 +144,10 @@ $(document).ready(function(){
   var ItemSet = function(){
     var itemSet = {
       title: "",
-      type: "",
+      type: "custom",
       map:"",
-      mode: "",
-      priority: false,
+      mode: "any",
+      priority: true,
       sortrank: 0,
       blocks: []
     }
@@ -158,13 +158,14 @@ $(document).ready(function(){
     itemSet.getPriority = getPriority;
     itemSet.getSortRank = getSortRank;
     itemSet.getBlocks = getBlocks;
+    itemSet.getBlock = getBlock;
 
     itemSet.setTitle = setTitle;
+    itemSet.setType = setType;
     itemSet.setMap = setMap;
     itemSet.setMode = setMode;
     itemSet.setPriority = setPriority;
     itemSet.setSortRank = setSortRank;
-    itemSet.setBlocks = setBlocks;
 
     itemSet.itemSetToString = itemSetToString;
 
@@ -193,6 +194,10 @@ $(document).ready(function(){
 
   var getBlocks = function(){
     return this.blocks;
+  }
+
+  var getBlock = function(index){
+    return this.blocks[index];
   }
 
   var setTitle = function(title){
@@ -237,9 +242,13 @@ $(document).ready(function(){
       set.splice(index, 1);
     }
 
-    var findItem = function(set, id){
-      var index = set.indexOf(id);
-      return set[index];
+    var findItem = function(set, type){
+      for(var i = 0; i < set.length; i++){
+        if(set[i].type == type){
+          return i;
+        }
+      }
+      return -1;
     }
 
     var arrange = function(set, from, to){
@@ -255,6 +264,7 @@ $(document).ready(function(){
 
     //Global Variables
     var data;
+    var itemSet;
 
     var loadContent = function(callback){
 
@@ -307,13 +317,69 @@ $(document).ready(function(){
       }
     }).disableSelection();
 
-    $('.block').click(function(){
+    $('.item-set').click(function(){
       $('.block').sortable({
         connectWith: ".dragNdrop",
         receive: function (event, ui) {
           ui.sender.data('copied', true);
         }
       }).disableSelection();
+    });
+
+    //Create new Item Set
+    $('#create-item-set').click(function(){
+      itemSet = ItemSet();
+      $('#item-set-name').append('New Item Set')
+      $('#item-set-name').show();
+      var map = $('input[name=map]:checked', '.item-set-option').val();
+
+      itemSet.setTitle($('#item-set-name').text());
+      itemSet.setMap(map);
+
+      $(this).hide();
+
+      //enable the adding of blocks
+      $('#add-block').prop('disabled', false);
+    });
+
+    //change Item Set name
+    $('#item-set-name').dblclick(function(){
+      $(this).attr('contenteditable', 'true');
+    });
+
+    $('#item-set-name').focusout(function(){
+      $(this).attr('contenteditable', 'false');
+    });
+
+    //add block
+    var counter = 0;
+    $('#add-block').click(function(){
+      var blockName = 'New Block ' + counter++;
+      var newBlock = '<li><p class="block-name">'+ blockName +'</p><ul class="block dragNdrop"></ul></li>'
+      $('.placeholder').before(newBlock);
+
+      var block = Block();
+      block.setType(blockName);
+      addItem(itemSet.getBlocks(), block);
+    });
+
+    //change Block name
+    var old;
+    $('.item-set').on('dblclick', 'p.block-name', function(){
+      old = $(this).text();
+      $(this).attr('contenteditable', 'true');
+      $(this).focus();
+    });
+
+    $('.item-set').on('focusout', 'p.block-name', function(){
+      $(this).attr('contenteditable', 'false');
+      var newBlockName = $(this).text();
+      var index = findItem(itemSet.getBlocks(), old);
+
+      if(index !== -1){
+        itemSet.getBlock(index).setType(newBlockName);
+      }
+      console.log(itemSet);
     });
 
 });

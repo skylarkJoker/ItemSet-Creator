@@ -2,20 +2,19 @@
   margin: 0;
   font-family: sans-serif;
   font-size: 1em;
+
+  width: 100%;
+  height: 100%;
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg', sizingMethod='scale');
+-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg', sizingMethod='scale')";
 }
 
-.container:before{
-
-  content: "";
-  position: fixed;
-  left: 0;
-  right: 0;
-  z-index: -1;
-
-  display: block;
-  width: 105%;
-  height: 105%;
-  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg');
+html{
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 
   /*-webkit-filter: blur(5px);
   -moz-filter: blur(5px);
@@ -151,13 +150,38 @@ input[type=text]:focus{
   border-radius: 0.2em;
   width: 45%;
   min-height: 12.5em;
+  max-height: 88.9vh;
   float: left;
   color: #fff;
 }
 
+#item-set-name{
+  /*margin-left: 1em;*/
+  text-align: center;
+}
+
+.item-set{
+    max-height: 62.9vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.item-set li:active{
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.item-set p{
+  z-index: 100;
+}
+
 .block-name{
+  width: 50%;
   margin-left: 1em;
   font-size: 1.3em;
+}
+
+.block-name:focus{
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .item-set-option{
@@ -170,7 +194,32 @@ input[type=text]:focus{
   border-radius: 0.1em;
   border-color:rgba(191, 191, 191, 0.5);
   width: 80%;
+  margin: 0 auto 1em auto;
+  padding: 0 0 0 0;
+}
+
+.block-placeholder{
+  min-height: 6.25em;
+  border: dashed;
+  border-radius: 0.1em;
+  border-color:rgba(191, 191, 191, 0.5);
+  width: 80%;
   margin: 0 auto;
+}
+
+#add-block{
+  display: block;
+  border: solid;
+  border-radius: .3em;
+  border-width: thin;
+  border-color: rgba(181, 211, 77, 0.7);
+
+  font-size: 3em;
+
+  color: #fff;
+  width: 15%;
+  margin: 0.4em auto;
+  background-color: rgba(255, 138, 0, 0);
 }
 
 .block li{
@@ -206,7 +255,7 @@ input[type=text]:focus{
   background-color: #5D7800;
 }
 
-#create-item-set:hover, #save-set:hover{
+#create-item-set:hover, #save-set:hover, #add-block:hover{
   background-color: #5D7800;
   color: #fff;
   font-weight: bold;

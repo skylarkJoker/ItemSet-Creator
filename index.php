@@ -27,6 +27,7 @@ $page_description = "Create an Item Set to use in League of Legends!";
 
       <div class="item-set-container">
         <button id="create-item-set" type="button" name="button">New Item Set</button>
+        <h1 id="item-set-name" hidden></h1>
         <form class="item-set-option" action="index.html" method="post">
           <input type="radio" name="map" value="SR" checked>Summoner's Rift
           <input type="radio" name="map" value="HA"> Howling Abyss
@@ -37,9 +38,9 @@ $page_description = "Create an Item Set to use in League of Legends!";
         </form>
 
         <ul class="item-set">
-          <li><p class='block-name'>New Block</p>
-            <ul class="block dragNdrop">
-
+          <li class="placeholder">
+            <ul class="block-placeholder">
+              <button id="add-block" type="button" name="button" disabled>+</button>
             </ul>
           </li>
         </ul>
