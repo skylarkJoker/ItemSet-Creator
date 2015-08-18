@@ -274,13 +274,10 @@ $(document).ready(function(){
       });
     }
 
-
-
     var setItemList = function(){
-
       for(key in data){
-        var item = '<li id="'+ key +'"><img src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/'+key+'.png " onerror="removeImage()"></li>';
-         $('#item-list').append(item);
+        var item = '<li id="'+ key +'"><img src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/'+key+'.png "></li>';
+         $('.item-list').append(item);
          $( "img" ).error(function() {
            $( this ).hide();
          });
@@ -292,5 +289,31 @@ $(document).ready(function(){
       setItemList();
     });
 
+    //Events
+
+    $('.item-list').sortable({
+      connectWith: ".dragNdrop",
+      helper: function (event, li) {
+          this.copyHelper = li.clone().insertAfter(li);
+          $(this).data('copied', false);
+          return li.clone();
+      },
+      stop: function () {
+          var copied = $(this).data('copied');
+          if (!copied) {
+              this.copyHelper.remove();
+          }
+          this.copyHelper = null;
+      }
+    }).disableSelection();
+
+    $('.block').click(function(){
+      $('.block').sortable({
+        connectWith: ".dragNdrop",
+        receive: function (event, ui) {
+          ui.sender.data('copied', true);
+        }
+      }).disableSelection();
+    });
 
 });
