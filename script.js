@@ -10,7 +10,6 @@ $(document).ready(function(){
     item.setID = setID;
     item.getCount = getCount;
     item.setCount = setCount;
-    item.itemToString = itemToString;
 
     return item;
   }
@@ -36,14 +35,6 @@ $(document).ready(function(){
     }
   }
 
-  var itemToString = function(){
-    var newString = '\t\t\t\t{\n'
-                    +'\t\t\t\t\t"id": '+ this.getID() +',\n'
-                    +'\t\t\t\t\t"count": '+this.getCount() + '\n'
-                    +'\t\t\t\t},\n';
-    return newString;
-
-  }
 
   //Block Class
   var Block = function(){
@@ -71,10 +62,6 @@ $(document).ready(function(){
     block.setMaxSummonerLevel = setMaxSummonerLevel;
     block.setShowIfSummonerSpell = setShowIfSummonerSpell;
     block.setHideIfSummonerSpell = setHideIfSummonerSpell;
-    block.isEmpty = isEmpty;
-
-    block.arrange = arrange;
-    block.blockToString = blockToString;
 
     return block;
   }
@@ -131,18 +118,6 @@ $(document).ready(function(){
     this.hideIfSummonerSpell = spell;
   }
 
-  var blockToString = function(){
-    var newString =  '\n\t\t{\n'
-                    +'\t\t\t"type": "' + this.getType() +'",\n'
-                    +'\t\t\t"recMath": ' + this.getRecMath() +',\n'
-                    +'\t\t\t"minSummonerLevel": ' + this.getMinSummonerLevel() + ',\n'
-                    +'\t\t\t"maxSummonerLevel": ' + this.getMaxSummonerLevel() + ',\n'
-                    +'\t\t\t"showIfSummonerSpell": "' + this.getShowIfSummonerSpell() + '",\n'
-                    +'\t\t\t"hideIfSummonerSpell": "' + this.getHideIfSummonerSpell() + '",\n'
-                    +'\t\t\t"items": [\n';
-      return newString;
-  }
-
   //ItemSet Class
   var ItemSet = function(){
     var itemSet = {
@@ -170,9 +145,6 @@ $(document).ready(function(){
     itemSet.setMode = setMode;
     itemSet.setPriority = setPriority;
     itemSet.setSortRank = setSortRank;
-    itemSet.isEmpty = isEmpty;
-
-    itemSet.itemSetToString = itemSetToString;
 
     return itemSet;
   }
@@ -225,31 +197,9 @@ $(document).ready(function(){
     this.sortrank = sortrank;
   }
 
-  var itemSetToString = function(){
-    var newString =  '{\n'
-                    +'\t"title": "' + this.getTitle() +'",\n'
-                    +'\t"type": "' + this.getType() +'",\n'
-                    +'\t"map": "' + this.getMap() + '",\n'
-                    +'\t"mode": "' + this.getMode() + '",\n'
-                    +'\t"priority": ' + this.getPriority() + ',\n'
-                    +'\t"sortrank": ' + this.getSortRank() + ',\n'
-                    +'\t"blocks": [';
-      return newString;
-  }
-
   //General Functions
     var addItem = function(set, item){
       set.push(item);
-    }
-
-    var removeItem = function(set, id){
-      if(!isEmpty(set)){
-        for(var i = 0; i < set.length; i++){
-          if(set[i].id == id){
-            set.splice(i, 1);
-          }
-        }
-      }
     }
 
     var findItem = function(set, type){
@@ -259,17 +209,6 @@ $(document).ready(function(){
         }
       }
       return -1;
-    }
-
-    var arrange = function(set, from, to){
-      set.splice(to, 0, set.splice(from, 1)[0]);
-    }
-
-    var isEmpty = function(set){
-        if(set.length == 0){
-          return true;
-        }
-        return false;
     }
 
     //Global Variables
@@ -296,7 +235,7 @@ $(document).ready(function(){
 
     var setItemList = function(){
       for(key in data){
-        var item = '<li id="'+ key +'" class="item"><img src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/'+key+'.png "></li>';
+        var item = '<li id="'+ key +'" class="item"><img src="http://ddragon.leagueoflegends.com/cdn/5.15.1/img/item/'+key+'.png "></li>';
          $('.item-list').append(item);
          $( "img" ).error(function() {
            $( this ).hide();
@@ -374,10 +313,9 @@ $(document).ready(function(){
       itemSet = ItemSet();
       $('#item-set-name').append('New Item Set')
       $('#item-set-name').show();
-      var map = $('input[name=map]:checked', '.item-set-option').val();
 
       itemSet.setTitle($('#item-set-name').text());
-      itemSet.setMap(map);
+
 
       $(this).hide();
 
@@ -427,6 +365,9 @@ $(document).ready(function(){
 
     //Save set to object
     var organize = function(){
+      var map = $('input[name=map]:checked', '.item-set-option').val();
+      itemSet.setMap(map);
+      
       //Clear previous block information to write new structure
       $('.block').each(function(){
         var blockName = $(this).parent().children('.block-name').text();
@@ -447,26 +388,25 @@ $(document).ready(function(){
       });
     }
 
-    var massiveObjToStringFunc = function(){
-      var blockString = "";
 
-      for(var i = 0; i < itemSet.getBlocks().length; i++){
-        var itemString = "";
+    var saveData = function (data, fileName){
 
-        for(var j = 0; j < itemSet.getBlock(i).getItems().length; j++){
-          itemString += itemSet.getBlock(i).getItems()[j].itemToString();
-        }
-        blockString += itemSet.getBlock(i).blockToString() + itemString + '\t\t\t]\n \t\t},\n';
-      }
-
-      var itemSetString = itemSet.itemSetToString();
-
-      var completeString = itemSetString + blockString + '\t]\n }\n';
-      console.log(completeString);
+            var a = document.createElement("a");
+            document.body.appendChild(a);
+            a.style = "display: none";
+            var json = JSON.stringify(data, null, 4);
+            var blob = new Blob([json], {type: "octet/stream"});
+            var url = URL.createObjectURL(blob);
+            a.href = url;
+            a.download = fileName;
+            a.click();
+            window.URL.revokeObjectURL(url);
     }
+
 
     $('#save-set').click(function(){
       organize();
-      massiveObjToStringFunc();
+      var fileName = itemSet.getTitle() + ".json";
+      saveData(itemSet, fileName);
     });
 });
