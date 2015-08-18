@@ -3,13 +3,14 @@ $(document).ready(function(){
   var Item = function(){
     var item = {
       id: "",
-      count: 0
+      count: 1
     }
 
     item.getID = getID;
     item.setID = setID;
     item.getCount = getCount;
     item.setCount = setCount;
+    item.itemToString = itemToString;
 
     return item;
   }
@@ -23,7 +24,7 @@ $(document).ready(function(){
   }
 
   var getCount = function(){
-    return this.id;
+    return this.count;
   }
 
   var setCount = function(option){
@@ -36,10 +37,10 @@ $(document).ready(function(){
   }
 
   var itemToString = function(){
-    var newString = '{\n'
-                    +'"id:"'+ this.getID() +',\n'
-                    +'"count:"'+this.getCount() + '\n'
-                    +'},\n';
+    var newString = '\t\t\t\t{\n'
+                    +'\t\t\t\t\t"id": '+ this.getID() +',\n'
+                    +'\t\t\t\t\t"count": '+this.getCount() + '\n'
+                    +'\t\t\t\t},\n';
     return newString;
 
   }
@@ -62,6 +63,7 @@ $(document).ready(function(){
     block.getMaxSummonerLevel = getMaxSummonerLevel;
     block.getShowIfSummonerSpell = getShowIfSummonerSpell;
     block.getHideIfSummonerSpell = getHideIfSummonerSpell;
+    block.getItems = getItems;
 
     block.setType = setType;
     block.setRecMath = setRecMath;
@@ -69,6 +71,7 @@ $(document).ready(function(){
     block.setMaxSummonerLevel = setMaxSummonerLevel;
     block.setShowIfSummonerSpell = setShowIfSummonerSpell;
     block.setHideIfSummonerSpell = setHideIfSummonerSpell;
+    block.isEmpty = isEmpty;
 
     block.arrange = arrange;
     block.blockToString = blockToString;
@@ -129,14 +132,14 @@ $(document).ready(function(){
   }
 
   var blockToString = function(){
-    var newString =  '{\n'
-                    +'"type":' + this.getType() +',\n'
-                    +'"recMath":' + this.getRecMath() +',\n'
-                    +'"minSummonerLevel":' + this.getMinSummonerLevel() + ',\n'
-                    +'"maxSummonerLevel":' + this.getMaxSummonerLevel() + ',\n'
-                    +'"showIfSummonerSpell":' + this.getShowIfSummonerSpell() + ',\n'
-                    +'"hideIfSummonerSpell":' + this.getHideIfSummonerSpell() + ',\n'
-                    + '"items": ['+''+']},\n';
+    var newString =  '\n\t\t{\n'
+                    +'\t\t\t"type": "' + this.getType() +'",\n'
+                    +'\t\t\t"recMath": ' + this.getRecMath() +',\n'
+                    +'\t\t\t"minSummonerLevel": ' + this.getMinSummonerLevel() + ',\n'
+                    +'\t\t\t"maxSummonerLevel": ' + this.getMaxSummonerLevel() + ',\n'
+                    +'\t\t\t"showIfSummonerSpell": "' + this.getShowIfSummonerSpell() + '",\n'
+                    +'\t\t\t"hideIfSummonerSpell": "' + this.getHideIfSummonerSpell() + '",\n'
+                    +'\t\t\t"items": [\n';
       return newString;
   }
 
@@ -153,6 +156,7 @@ $(document).ready(function(){
     }
 
     itemSet.getTitle = getTitle;
+    itemSet.getType = getType;
     itemSet.getMap = getMap;
     itemSet.getMode = getMode;
     itemSet.getPriority = getPriority;
@@ -166,6 +170,7 @@ $(document).ready(function(){
     itemSet.setMode = setMode;
     itemSet.setPriority = setPriority;
     itemSet.setSortRank = setSortRank;
+    itemSet.isEmpty = isEmpty;
 
     itemSet.itemSetToString = itemSetToString;
 
@@ -222,13 +227,13 @@ $(document).ready(function(){
 
   var itemSetToString = function(){
     var newString =  '{\n'
-                    +'"title":' + this.getTitle() +',\n'
-                    +'"type":' + this.getType() +',\n'
-                    +'"map":' + this.getMap() + ',\n'
-                    +'"mode":' + this.getMode() + ',\n'
-                    +'"priority":' + this.getPriority() + ',\n'
-                    +'"sortrank":' + this.getSortRank() + ',\n'
-                    + '"blocks": ['+''+']},\n';
+                    +'\t"title": "' + this.getTitle() +'",\n'
+                    +'\t"type": "' + this.getType() +'",\n'
+                    +'\t"map": "' + this.getMap() + '",\n'
+                    +'\t"mode": "' + this.getMode() + '",\n'
+                    +'\t"priority": ' + this.getPriority() + ',\n'
+                    +'\t"sortrank": ' + this.getSortRank() + ',\n'
+                    +'\t"blocks": [';
       return newString;
   }
 
@@ -238,8 +243,13 @@ $(document).ready(function(){
     }
 
     var removeItem = function(set, id){
-      var index = set.indexOf(id);
-      set.splice(index, 1);
+      if(!isEmpty(set)){
+        for(var i = 0; i < set.length; i++){
+          if(set[i].id == id){
+            set.splice(i, 1);
+          }
+        }
+      }
     }
 
     var findItem = function(set, type){
@@ -255,8 +265,8 @@ $(document).ready(function(){
       set.splice(to, 0, set.splice(from, 1)[0]);
     }
 
-    var isEmpty = function(){
-        if(this.length == 0){
+    var isEmpty = function(set){
+        if(set.length == 0){
           return true;
         }
         return false;
@@ -286,7 +296,7 @@ $(document).ready(function(){
 
     var setItemList = function(){
       for(key in data){
-        var item = '<li id="'+ key +'"><img src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/'+key+'.png "></li>';
+        var item = '<li id="'+ key +'" class="item"><img src="http://ddragon.leagueoflegends.com/cdn/5.2.1/img/item/'+key+'.png "></li>';
          $('.item-list').append(item);
          $( "img" ).error(function() {
            $( this ).hide();
@@ -303,6 +313,12 @@ $(document).ready(function(){
 
     $('.item-list').sortable({
       connectWith: ".dragNdrop",
+      receive: function(event, ui){
+        var pasteItem = checkList("item-list", $(this).data().uiSortable.currentItem);
+             if (!pasteItem){
+                  $(this).data().uiSortable.currentItem.remove();
+             }
+      },
       helper: function (event, li) {
           this.copyHelper = li.clone().insertAfter(li);
           $(this).data('copied', false);
@@ -317,11 +333,38 @@ $(document).ready(function(){
       }
     }).disableSelection();
 
+    function checkList(listName, newItem){
+        var dupl = false;
+        $("." + listName + " > li").each(function(){
+            if ($(this)[0] !== newItem[0]){
+                if ($(this).html() == newItem.html()){
+                    dupl = true;
+                }
+            }
+        });
+
+        return !dupl;
+    }
+
+
+    var removeIntent = false;
+
     $('.item-set').click(function(){
       $('.block').sortable({
-        connectWith: ".dragNdrop",
+        connectWith: ".block",
         receive: function (event, ui) {
           ui.sender.data('copied', true);
+        },
+        over: function () {
+            removeIntent = false;
+        },
+        out: function () {
+            removeIntent = true;
+        },
+        beforeStop: function (event, ui) {
+            if(removeIntent == true){
+                ui.item.remove();
+            }
         }
       }).disableSelection();
     });
@@ -349,6 +392,7 @@ $(document).ready(function(){
 
     $('#item-set-name').focusout(function(){
       $(this).attr('contenteditable', 'false');
+      itemSet.setTitle($(this).text());
     });
 
     //add block
@@ -379,7 +423,50 @@ $(document).ready(function(){
       if(index !== -1){
         itemSet.getBlock(index).setType(newBlockName);
       }
-      console.log(itemSet);
     });
 
+    //Save set to object
+    var organize = function(){
+      //Clear previous block information to write new structure
+      $('.block').each(function(){
+        var blockName = $(this).parent().children('.block-name').text();
+        var index = findItem(itemSet.getBlocks(), blockName);
+
+        itemSet.getBlock(index).getItems().length = 0;
+      });
+
+      //add current items in block to item array
+      $('.item-set .item').each(function(){
+        var item = Item();
+        item.setID($(this).attr('id'));
+
+        var parentBlock = $(this).parent().parent().children('.block-name').text();
+        var index = findItem(itemSet.getBlocks(), parentBlock);
+
+        addItem(itemSet.getBlock(index).getItems(), item);
+      });
+    }
+
+    var massiveObjToStringFunc = function(){
+      var blockString = "";
+
+      for(var i = 0; i < itemSet.getBlocks().length; i++){
+        var itemString = "";
+
+        for(var j = 0; j < itemSet.getBlock(i).getItems().length; j++){
+          itemString += itemSet.getBlock(i).getItems()[j].itemToString();
+        }
+        blockString += itemSet.getBlock(i).blockToString() + itemString + '\t\t\t]\n \t\t},\n';
+      }
+
+      var itemSetString = itemSet.itemSetToString();
+
+      var completeString = itemSetString + blockString + '\t]\n }\n';
+      console.log(completeString);
+    }
+
+    $('#save-set').click(function(){
+      organize();
+      massiveObjToStringFunc();
+    });
 });
