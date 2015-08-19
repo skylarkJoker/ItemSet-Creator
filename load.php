@@ -2,8 +2,6 @@
 
 <?php
 
-// $curl = curl_init("https://global.api.pvp.net/api/lol/static-data/na/v1.2/item?api_key=9695971b-ad00-48f0-8353-641b525e9257");
-
 // set HTTP header
 $headers = array(
     'Content-Type: application/json',
@@ -11,7 +9,7 @@ $headers = array(
 
 // query string
 $fields = array(
-    'api_key' => '9695971b-ad00-48f0-8353-641b525e9257'
+    'api_key' => $key
 );
 $url = 'https://global.api.pvp.net/api/lol/static-data/na/v1.2/item?' . http_build_query($fields);
 
