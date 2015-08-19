@@ -215,6 +215,39 @@ $(document).ready(function(){
     var data;
     var itemSet;
 
+    var loadContent = function(callback){
+
+      $.getJSON("code.json", function(json) {
+            var code = json.Code
+
+           var xmlhttp = new XMLHttpRequest();
+           var url = "https://global.api.pvp.net/api/lol/static-data/na/v1.2/item?api_key=" + code;
+          xmlhttp.onreadystatechange = function() {
+              if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                  callback(JSON.parse(xmlhttp.responseText));
+              }
+          }
+          xmlhttp.open("GET", url, true);
+          xmlhttp.send();
+
+      });
+    }
+
+    var setItemList = function(){
+      for(key in data){
+        var item = '<li id="'+ key +'" class="item"><img src="http://ddragon.leagueoflegends.com/cdn/5.15.1/img/item/'+key+'.png "></li>';
+         $('.item-list').append(item);
+         $( "img" ).error(function() {
+           $( this ).hide();
+         });
+      }
+    }
+
+    loadContent(function(response){
+      data = response.data;
+      setItemList();
+    });
+
     //Events
 
     $('.item-list').sortable({
@@ -334,7 +367,7 @@ $(document).ready(function(){
     var organize = function(){
       var map = $('input[name=map]:checked', '.item-set-option').val();
       itemSet.setMap(map);
-
+      
       //Clear previous block information to write new structure
       $('.block').each(function(){
         var blockName = $(this).parent().children('.block-name').text();
