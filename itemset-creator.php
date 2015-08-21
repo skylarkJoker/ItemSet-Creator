@@ -2,7 +2,7 @@
 $page_title = "Item Set";
 $page_description = "Create an Item Set to use in League of Legends!";
 ?>
-<?php  include("/header.php"); ?>
+<?php  include("header.php"); ?>
 
     <div class="container row">
       <div class="large-5 columns">
@@ -14,7 +14,7 @@ $page_description = "Create an Item Set to use in League of Legends!";
 
                 <div class="row">
                   <div class="small-1 columns">
-                    <label for="right-label" data-tooltip aria-haspopup="true" class="right inline has-tip" title='Type in a search term in the box on the right! e.g "potion"'><object type="image/svg+xml" data="/ItemCreator/img/search.svg" id="search"></object></label>
+                    <label for="right-label" data-tooltip aria-haspopup="true" class="right inline has-tip" title='Type in a search term in the box on the right! e.g "potion"'><object type="image/svg+xml" data="img/search.svg" id="search"></object></label>
                   </div>
                   <div class="small-11 columns">
                     <input class="search" type="text" id="right-label" placeholder=" Enter name of item">
@@ -64,4 +64,4 @@ $page_description = "Create an Item Set to use in League of Legends!";
         </div>
       </div>
     </div>
-<?php include("/footer.php"); ?>
+<?php include("footer.php"); ?>

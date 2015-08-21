@@ -25,7 +25,7 @@ $page_description = "Welcome to Item Set Creator!";
   <div class="row tier-2">
     <div class="large-4 columns">
       <div class="option-tier-2">
-        <h4 class="title" >Basic Champion Stratgies</h4>
+        <h4 class="title" >Basic Champion Strategies</h4>
       </div>
     </div>
     <div class="large-4 columns">
