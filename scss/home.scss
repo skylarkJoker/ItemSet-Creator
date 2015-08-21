@@ -1,0 +1,115 @@
+@import "partials/mixins";
+@import "partials/variables";
+
+$bg-url: "http://ddragon.leagueoflegends.com/cdn/img/champion/splash";
+
+@include keyframes(visible){
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+.main{
+  padding-top: 5em;
+  min-height: 100vh;
+
+  h1, h2, h3, h4{
+    color: #fff;
+  }
+}
+
+a .option-tier-1{
+  color: $white;
+}
+
+.option-tier-1{
+
+  border: solid;
+  border-width: 1px;
+  border-color: rgba(190, 190, 190, 0.8);
+  height: 15em;
+  width: auto;
+  padding: 3em;
+
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(#{$bg-url}/Heimerdinger_0.jpg);
+  background-position: center;
+  background-size: cover;
+
+  transition: background 5s ease;
+
+  .title{
+    position: relative;
+    top: 1em;
+    text-align: center;
+    transition: transform 2s ease;
+  }
+
+  p{
+    margin: 0.5em 0 0 0;
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+
+  &:hover{
+    background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ), url(#{$bg-url}/Heimerdinger_0.jpg);
+    background-position: center;
+    background-size: cover;
+
+    border-color: $orange;
+    .title{
+      transform: translate(-3em, -1em) scale(0.8);
+    }
+    p{
+      opacity: 1;
+    }
+  }
+}
+
+.tier-2{
+  margin-top: 1.5em;
+}
+
+.option-tier-2{
+  background: linear-gradient( rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4) ), url(#{$bg-url}/Jayce_0.jpg);
+  background-position: center;
+  background-size: cover;
+
+  border: solid;
+  border-width: 1px;
+  border-color: rgba(190, 190, 190, 0.8);
+
+  height: 7em;
+  width: auto;
+
+  .title{
+    text-align: center;
+    margin: 1.6em 0 0 0;
+  }
+
+  &:hover{
+    border-color: $orange;
+    .title{
+      font-weight: bold;
+    }
+  }
+}
+
+#myModal
+{
+  background-color: rgba(0, 0, 0, 0.9);
+  #modalTitle{
+    color: $white;
+  }
+}
+
+
+footer{
+  padding: 1em;
+  text-align: center;
+  color: #fff;
+  background-color: #000;
+
+  p{
+    font-size: 0.7em;
+  }
+
+}

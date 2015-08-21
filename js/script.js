@@ -216,7 +216,7 @@ $(document).ready(function(){
     }
 
     function appendCount(object){
-      object.append('<p class="counter"><span>'+object.data('counter')+'<span></p>');
+      object.append('<span class="counter">'+object.data('counter')+'<span>');
     }
 
     function updateCount(object){
@@ -324,6 +324,7 @@ $(document).ready(function(){
 
       //enable the adding of blocks
       $('#add-block').prop('disabled', false);
+      $('#save-set').prop('disabled', false);
     });
 
     //change Item Set name
@@ -425,4 +426,22 @@ $(document).ready(function(){
 
     $('.search').fastLiveFilter('.item-list');
 
+    jQuery(window).scroll(function() {
+            var scroll = $(window).scrollTop();
+          if (scroll >= 10) {
+              $("nav").addClass("darken");
+              $("nav").removeClass("transparent");
+          }
+          if (scroll < 10) {
+              $("nav").removeClass("darken");
+              $("nav").addClass("transparent");
+          }
+      });
+
+      $('.your-class').slick({
+        dots:true,
+        arrows:true,
+        initialSlide:0,
+        infinite: false,
+      });
 });

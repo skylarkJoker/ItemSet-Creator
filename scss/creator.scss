@@ -1,0 +1,211 @@
+$black-tranparent: rgba(0, 0, 0, 0.9);
+$transparent: rgba(0, 0, 0, 0);
+
+@import "partials/mixins";
+
+.darken{
+  @include transition(background-color 1s ease);
+  background-color: $black-tranparent;
+}
+
+.transparent{
+  @include transition(background-color 1s ease);
+  background-color: $transparent;
+}
+
+.container{
+  font-family: sans-serif;
+  max-width: 1200px;
+  padding: 2em 0 6.25em 0;
+}
+
+body{
+margin: 0;
+color: #fff;
+
+filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Viktor_0.jpg', sizingMethod='scale');
+-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Viktor_0.jpg', sizingMethod='scale')";
+
+background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Viktor_0.jpg') no-repeat center center fixed;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+}
+
+nav{
+  img{
+    width: 30px;
+  }
+  .top-bar-section{
+    li{
+      background-color: rgba(0, 0, 0, 0);;
+    }
+  }
+
+}
+
+.item-list{
+  padding: 1em 1em 0 1em;
+  height: 27em;
+  margin: 0;
+
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+  border: solid;
+  border-width: 1px;
+  border-bottom: none;
+  // border-radius: 0.3em 0 0 0;
+  border-color:rgba(191, 191, 191, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
+
+  li{
+    list-style: none;
+    display: inline-block;
+  }
+
+  img{
+    border: thin;
+    border-radius: 1em;
+    margin: 0.2em;
+    z-index: 1;
+  }
+}
+
+.sorting-options{
+  background-color: #690800;
+  padding: 1em;
+  color: #fff;
+}
+
+#search{
+  width: 1.5em;
+  margin:0 0.5em 0 0.5em;
+}
+
+input{
+  color: #fff!important;
+  background-color: rgba(0, 0, 0, 0.3)!important;
+  border: none!important;
+}
+
+input[type=text]:focus{
+  background-color: rgba(0, 0, 0, 0.5)!important;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+
+
+.item-set-container{
+
+  padding: 1.5em;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: solid;
+  border-width: 1px;
+  border-color:rgba(191, 191, 191, 0.5);
+  min-height: 37em;
+
+  color: #fff;
+
+  h1{
+    text-align: center;
+    color: #fff;
+    &:hover{
+      color: #e9c132;
+    }
+  }
+}
+
+#create-item-set{
+  display: block;
+  margin: 0 auto 1em auto;
+}
+
+.item-set{
+    max-height: 20em;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
+    list-style: none;
+}
+
+.block-placeholder{
+  min-height: 6.25em;
+  border: dashed;
+  border-radius: 0.1em;
+  border-color:rgba(191, 191, 191, 0.5);
+  width: 80%;
+  margin: 0 auto;
+}
+
+#add-block, #op-block{
+  display: block;
+  font-size: 2em;
+  margin: 1em auto 0 auto;
+  padding: 0 0.3em;
+}
+
+
+.block{
+  min-height: 6.25em;
+  border: solid;
+  border-radius: 0.1em;
+  border-color:rgba(191, 191, 191, 0.5);
+  width: 80%;
+  margin: 0 auto 1em auto;
+  padding: 0 0 0 0;
+  list-style: none;
+  li{
+    display: inline-block;
+  }
+
+  img{
+    border: thin;
+    border-radius: 1em;
+    margin: 0.2em;
+    z-index: -1;
+  }
+}
+
+#op-block{
+  float: right;
+}
+
+.counter{
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.8);;
+  font-weight: bold;
+  border-radius: 0.2em;
+  padding: 0 0.25em;
+  margin: 2.5em 0 0 -1em;
+  z-index: 3;
+}
+
+#save-set{
+  // margin-left: 13em
+  float: right;
+}
+
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,1);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(10, 78, 88, 0.8);
+
+}
+::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(255,0,0,0.4);
+}

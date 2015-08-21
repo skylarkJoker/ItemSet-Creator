@@ -11,7 +11,7 @@ $headers = array(
 $fields = array(
     'api_key' => $key
 );
-$url = 'https://global.api.pvp.net/api/lol/static-data/na/v1.2/item?' . http_build_query($fields);
+$url = 'https://global.api.pvp.net/api/lol/static-data/na/v1.2/item?itemListData=consumed&' . http_build_query($fields);
 
 // Open connection
 $ch = curl_init();
@@ -37,9 +37,14 @@ ksort($data);
 
 foreach ($data as $key => $value) {  // echo $value['id']."\t";
 
-  // var_dump($value['id']);
-  echo '<li id="'.$value['id'] .'" class="item"><img src="http://ddragon.leagueoflegends.com/cdn/5.15.1/img/item/'.$value['id'] .'.png "></li>';
+  //var_dump($value['consumed']);
 
+  if(array_key_exists("consumed", $value)){
+    echo '<li class="item" id="'.$value['id'] .'" data-item-name="'.$value['name'] .'" data-consumed="'.$value['consumed'] .'" data-counter= 0><img src="http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/'.$value['id'] .'.png "></li>';
+  }
+  else{
+   echo '<li class="item" id="'.$value['id'] .'" data-item-name="'.$value['name'] .'" ><img src="http://ddragon.leagueoflegends.com/cdn/5.16.1/img/item/'.$value['id'] .'.png "></li>';
+  }
 }
 
 

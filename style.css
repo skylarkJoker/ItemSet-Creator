@@ -2,15 +2,14 @@
   margin: 0;
   font-family: sans-serif;
   font-size: 1em;
-
   width: 100%;
   height: 100%;
-  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg', sizingMethod='scale');
--ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg', sizingMethod='scale')";
+  filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Viktor_0.jpg', sizingMethod='scale');
+-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Viktor_0.jpg', sizingMethod='scale')";
 }
 
 html{
-  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Aatrox_0.jpg') no-repeat center center fixed;
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Viktor_0.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -29,9 +28,8 @@ color: #fff;
 }
 
 nav{
-  float: left;
-  background-color: #4D0011;
-  height: 100vh;
+  
+  background-color: #690800;
   color: #fff;
 
 }
@@ -44,6 +42,7 @@ ul{
 nav li{
   padding: 0 1em 0 1em;
   list-style: none;
+  display: inline-block;
 }
 
 nav img{
@@ -52,12 +51,12 @@ nav img{
 }
 
 nav li:hover, li:active{
-  background-color: #1A8363;
+  background-color: #0A4E58;
   color: #fff;
 }
 
 .item-list-container{
-  height: 75vh;
+  height: 62vh;
   width: 40%;
   margin-top: 1em;
   margin-left: 1.5em;
@@ -66,18 +65,17 @@ nav li:hover, li:active{
 }
 
 .sorting-options{
-  background-color: #750019;
+  background-color: #690800;
   padding: 1em 0 1em 1em;
   color: #fff;
 }
 
-.search{
-  fill: #5af600;
-  width: 1.2em;
+#search{
+  width: 1em;
   margin:0 0.5em 0 0.5em;
 }
 
-#search{
+.search{
   border: none;
   border-color: #fff;
   background-color: rgba(0, 0, 0, 0);
@@ -87,13 +85,19 @@ nav li:hover, li:active{
   margin-bottom: 1em;
 }
 
+input{
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.3)!important;
+}
+
 input[type=text]:focus{
-  box-shadow: 0 0 5px rgba(26, 131, 99, 1);
-  outline-color: rgba(26, 131, 99, 1);
+  background-color: rgba(0, 0, 0, 0.5)!important;
+  outline: none;
+  -webkit-appearance: none;
 }
 
 .item-list{
-  padding: 0;
+  padding: 1em 1em 0 1em;
   margin-top: 0;
   margin-bottom: 0.5em;
   height: inherit;
@@ -101,11 +105,12 @@ input[type=text]:focus{
   overflow-y: scroll;
   overflow-x: hidden;
 
-  border: solid;
+  /*border: solid;*/
   border-width: thin;
   border-right: none;
   border-radius: 0.3em 0 0 0;
   border-color:rgba(191, 191, 191, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .item-list li{
@@ -117,6 +122,7 @@ input[type=text]:focus{
   border: thin;
   border-radius: 1em;
   margin: 0.2em;
+  z-index: 1;
 }
 
 ::-webkit-scrollbar {
@@ -133,7 +139,7 @@ input[type=text]:focus{
 ::-webkit-scrollbar-thumb {
     -webkit-border-radius: 10px;
     border-radius: 10px;
-    background: rgba(26, 131, 99, 0.8);
+    background: rgba(10, 78, 88, 0.8);
 
 }
 ::-webkit-scrollbar-thumb:window-inactive {
@@ -145,12 +151,14 @@ input[type=text]:focus{
   margin-left: 2em;
   padding-top: 1.5em;
 
-  border: solid;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  /*border: solid;
   border-color:rgba(191, 191, 191, 0.5);
-  border-radius: 0.2em;
+  border-radius: 0.2em;*/
   width: 45%;
   min-height: 12.5em;
-  max-height: 88.9vh;
+  max-height: 88vh;
   float: left;
   color: #fff;
 }
@@ -159,9 +167,12 @@ input[type=text]:focus{
   /*margin-left: 1em;*/
   text-align: center;
 }
+#item-set-name:hover{
+  color: #93C047;
+}
 
 .item-set{
-    max-height: 62.9vh;
+    max-height: 51vh;
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -178,6 +189,10 @@ input[type=text]:focus{
   width: 50%;
   margin-left: 1em;
   font-size: 1.3em;
+}
+
+.block-name:hover{
+  color: #93C047;
 }
 
 .block-name:focus{
@@ -207,12 +222,12 @@ input[type=text]:focus{
   margin: 0 auto;
 }
 
-#add-block{
+#add-block, #op-block{
   display: block;
   border: solid;
   border-radius: .3em;
-  border-width: thin;
-  border-color: rgba(181, 211, 77, 0.7);
+  border-width: normal;
+  border-color: rgba(48, 117, 127, 0.7);
 
   font-size: 3em;
 
@@ -222,9 +237,29 @@ input[type=text]:focus{
   background-color: rgba(255, 138, 0, 0);
 }
 
+#op-block{
+  float: right;
+  margin: 1em 0.5em 1em auto;
+  padding: 0;
+  width: 1em;
+  font-size: 2em;
+}
+
 .block li{
   display: inline-block;
   list-style: none;
+}
+
+.counter{
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.8);;
+  font-weight: bold;
+  border-radius: 0.2em;
+  padding: 0.25em;
+  margin: -1.8em 0 0 3em;
+  z-index: 3;
+  width: auto;
+
 }
 
 #create-item-set{
@@ -247,16 +282,16 @@ input[type=text]:focus{
   border: solid;
   border-radius: .3em;
   border-width: thin;
-  border-color: rgba(181, 211, 77, 0.7);
+  border-color: rgba(48, 117, 127, 0.7);
 
   color: #fff;
   margin: 0 1em 1em 0;
   float: right;
-  background-color: #5D7800;
+  background-color: #013840;
 }
 
-#create-item-set:hover, #save-set:hover, #add-block:hover{
-  background-color: #5D7800;
+#create-item-set:hover, #save-set:hover, #add-block:hover, #op-block:hover{
+  background-color: #30757F;
   color: #fff;
   font-weight: bold;
   border-color: #fff;
@@ -265,8 +300,11 @@ input[type=text]:focus{
 
 footer{
   text-align: center;
+
+  width:100%;
+  height:100px;
   position:absolute;
   bottom:0;
-  width:100%;
-  height:1.5em;   /* Height of the footer */
+  left:0;
+  background-color: #000;
 }
