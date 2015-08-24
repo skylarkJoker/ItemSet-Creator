@@ -4,6 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><?php echo $page_title; ?></title>
+    <meta http-equiv="description" content="<?php echo $page_description; ?>" />
+
     <link rel="stylesheet" href="slick/slick-theme.css"/>
     <link rel="stylesheet" href="slick/slick.css"/>
     <link rel="stylesheet" href="stylesheets/app.css" />
@@ -11,11 +13,10 @@
 
     <script src="bower_components/modernizr/modernizr.js"></script>
 
-    <meta http-equiv="description" content="<?php echo $page_description; ?>" />
-
     <script src="js/jquery-2.1.4.js"></script>
     <script src="js/jquery-ui.js"></script>
     <script src="js/jquery.fastLiveFilter.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
 
   </head>
   <body>
