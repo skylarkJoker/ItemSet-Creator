@@ -214,7 +214,7 @@ $(document).ready(function(){
       }
       return -1;
     }
-//Count the amount of consumables stacked
+
     function appendCount(object){
       object.append('<span class="counter">'+object.data('counter')+'<span>');
     }
@@ -225,15 +225,14 @@ $(document).ready(function(){
 
     //Global Variables
     var data;
-    var itemSet;//Needs to be initialized
+    var itemSet;
 
 
+    //Events
 
-//Make the big list of items sortable
     $('.item-list').sortable({
       connectWith: ".dragNdrop",
       receive: function(event, ui){
-        //if we receive a duplicate item in this list, remove it
         var pasteItem = checkList("item-list", $(this).data().uiSortable.currentItem);
              if (!pasteItem){
                   $(this).data().uiSortable.currentItem.remove();
@@ -254,7 +253,6 @@ $(document).ready(function(){
       }
     }).disableSelection();
 
-//Function to remove duplicates from the main item list
     function checkList(listName, newItem){
         var dupl = false;
         $("." + listName + " > li").each(function(){
@@ -268,7 +266,7 @@ $(document).ready(function(){
         return !dupl;
     }
 
-//Item Set Manipulation. Making the set sortable. So many issues sigh...
+//Item Set Manipulation
     var removeIntent = false;
     var duplicateChk = {};
 
@@ -313,6 +311,21 @@ $(document).ready(function(){
       }).disableSelection();
     });
 
+    //Create new Item Set
+    $('#create-item-set').click(function(){
+      itemSet = ItemSet();
+      $('#item-set-name').append('New Item Set')
+      $('#item-set-name').show();
+
+      itemSet.setTitle($('#item-set-name').text());
+
+
+      $(this).hide();
+
+      //enable the adding of blocks
+      $('#add-block').prop('disabled', false);
+      $('#save-set').prop('disabled', false);
+    });
 
     //change Item Set name
     $('#item-set-name').dblclick(function(){
@@ -411,7 +424,7 @@ $(document).ready(function(){
       console.log(itemSet);
     });
 
-    // $('.search').fastLiveFilter('.item-list');
+    $('.search').fastLiveFilter('.item-list');
 
     jQuery(window).scroll(function() {
             var scroll = $(window).scrollTop();
